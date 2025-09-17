@@ -533,17 +533,19 @@ export class DashboardOperations {
             status_pago,
             created_at,
             client:clients(id, nombre_comercial),
-            expenses:expenses(id, monto_a_pagar, category, deleted_at)
+            expenses!inner(id, monto_a_pagar, category, deleted_at)
           `);
         
         if (dateFilter) {
           // Enhanced date filter parsing
           if (dateFilter.includes('gte.')) {
-            const value = dateFilter.split('gte.')[1];
+            const parts = dateFilter.split('gte.');
+            const value = parts[1].split(',')[0];
             query = query.gte('created_at', value);
           }
           if (dateFilter.includes('lte.')) {
-            const value = dateFilter.split('lte.')[1];
+            const parts = dateFilter.split('lte.');
+            const value = parts[1];
             query = query.lte('created_at', value);
           }
         }

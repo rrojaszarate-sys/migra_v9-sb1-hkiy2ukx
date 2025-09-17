@@ -214,7 +214,7 @@ export function Dashboard() {
             .select(`
               *,
               client:clients(*),
-              expenses:expenses(*)
+              expenses!inner(*)
             `);
           
           // Apply time-based filter to prevent timeout
