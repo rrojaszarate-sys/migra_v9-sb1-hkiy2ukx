@@ -140,9 +140,15 @@ export function RoleSelector() {
                 <div className="mt-2 text-sm text-yellow-700">
                   <p>
                     Selector temporal de roles para desarrollo y pruebas. 
-                    Para habilitar autenticación completa, configure VITE_AUTH_MODE=production 
-                    en su archivo .env y reinicie el servidor.
+                    Si las credenciales de login no funcionan, use este selector para acceder 
+                    como administrador y generar usuarios de prueba.
                   </p>
+                  <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs">
+                    <p><strong>Credenciales de desarrollo:</strong></p>
+                    <p>admin@made.com / admin123 (Administrador)</p>
+                    <p>ejecutivo@made.com / ejecutivo123 (Ejecutivo)</p>
+                    <p>visualizador@made.com / visualizador123 (Visualizador)</p>
+                  </div>
                   <div className="mt-3 p-2 bg-yellow-100 rounded text-xs">
                     <strong>Variable de entorno:</strong> VITE_AUTH_MODE={config.mode}
                   </div>

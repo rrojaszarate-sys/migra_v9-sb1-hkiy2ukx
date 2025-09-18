@@ -356,8 +356,10 @@ export function LoginForm({ onSuccess, onSwitchToRegister, className = '' }: Log
               <p><strong>Visualizador:</strong> visualizador@made.com / visualizador123</p>
               <div className="mt-2 p-2 bg-yellow-50 border border-yellow-200 rounded">
                 <p className="text-xs text-yellow-800">
-                  <strong>Nota:</strong> Si las credenciales no funcionan, use el selector de roles 
-                  o genere usuarios de prueba desde el panel de administración.
+                  <strong>Opciones si las credenciales no funcionan:</strong><br/>
+                  1. Use el selector de roles (si está habilitado)<br/>
+                  2. Genere usuarios de prueba desde el panel de administración<br/>
+                  3. Configure VITE_AUTH_MODE=production para usar autenticación completa
                 </p>
               </div>
             </div>

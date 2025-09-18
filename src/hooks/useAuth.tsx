@@ -536,6 +536,70 @@ export function AuthProvider({ children }: AuthProviderProps) {
           return { success: true };
         } else {
           console.log('⚠️ Test user not found in development mode');
+          
+          // Try Supabase authentication as fallback in development mode
+          console.log('🔄 Trying Supabase authentication as fallback...');
+          try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email: email,
+              password: password
+            });
+            
+            if (!error && data.user) {
+              console.log('✅ Supabase fallback authentication successful');
+              
+              // Try to fetch user profile
+              const { data: profile, error: profileError } = await supabase
+                .from('users')
+                .select('*')
+                .eq('id', data.user.id)
+                .maybeSingle();
+              
+              if (!profileError && profile) {
+                const authUser: AuthUser = {
+                  id: profile.id,
+                  username: profile.username,
+                  email: profile.email,
+                  role: profile.role,
+                  status: profile.status,
+                  created_at: profile.created_at
+                };
+                
+                setAuthState(prev => ({
+                  ...prev,
+                  user: authUser,
+                  isAuthenticated: true,
+                  loading: false,
+                  error: null
+                }));
+                
+                return { success: true };
+              } else {
+                // Create basic user from Supabase data
+                const basicUser: AuthUser = {
+                  id: data.user.id,
+                  username: data.user.email?.split('@')[0] || 'Usuario',
+                  email: data.user.email || email,
+                  role: 'Visualizador',
+                  status: 'Activo',
+                  created_at: new Date().toISOString()
+                };
+                
+                setAuthState(prev => ({
+                  ...prev,
+                  user: basicUser,
+                  isAuthenticated: true,
+                  loading: false,
+                  error: null
+                }));
+                
+                return { success: true };
+              }
+            }
+          } catch (supabaseError) {
+            console.log('⚠️ Supabase fallback also failed:', supabaseError);
+          }
+          
           setAuthState(prev => ({
             ...prev,
             loading: false,
@@ -543,7 +607,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           }));
           return { 
             success: false, 
-            error: 'Credenciales de desarrollo no válidas. Use: admin@made.com / admin123 o genere usuarios de prueba desde el panel de administración.' 
+            error: 'Credenciales no válidas. Para desarrollo: use admin@made.com / admin123, active el selector de roles, o genere usuarios de prueba desde el panel de administración.' 
           };
         }
       }
