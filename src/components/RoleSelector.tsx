@@ -149,6 +149,12 @@ export function RoleSelector() {
                     <p>ejecutivo@made.com / ejecutivo123 (Ejecutivo)</p>
                     <p>visualizador@made.com / visualizador123 (Visualizador)</p>
                   </div>
+                  <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs">
+                    <p><strong>Credenciales de desarrollo:</strong></p>
+                    <p>admin@made.com / admin123 (Administrador)</p>
+                    <p>ejecutivo@made.com / ejecutivo123 (Ejecutivo)</p>
+                    <p>visualizador@made.com / visualizador123 (Visualizador)</p>
+                  </div>
                   <div className="mt-3 p-2 bg-yellow-100 rounded text-xs">
                     <strong>Variable de entorno:</strong> VITE_AUTH_MODE={config.mode}
                   </div>

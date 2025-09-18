@@ -360,6 +360,8 @@ export function LoginForm({ onSuccess, onSwitchToRegister, className = '' }: Log
                   1. Use el selector de roles (si está habilitado)<br/>
                   2. Genere usuarios de prueba desde el panel de administración<br/>
                   3. Configure VITE_AUTH_MODE=production para usar autenticación completa
+                  2. Genere usuarios de prueba desde el panel de administración<br/>
+                  3. Configure VITE_AUTH_MODE=production para usar autenticación completa
                 </p>
               </div>
             </div>
